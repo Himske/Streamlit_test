@@ -1,0 +1,36 @@
+Create virtual environment:
+===========================
+python -m venv venv
+
+Update pip and install requirements:
+====================================
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+Create requirements.txt:
+========================
+pip freeze > requirements.txt 
+
+Activate:
+=========
+.\venv\Scripts\Activate.ps1
+
+To be able to run activation some execution policy might need to be added:
+Get-ExecutionPolicy -List
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+If you want to disable the execution:
+Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser
+
+VSCode settings:
+================
+{
+    "python.pythonPath": "venv\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": false,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "autopep8",
+    "editor.formatOnSave": true,
+    "editor.rulers": [79, 119],
+    "editor.renderWhitespace": "all"
+}
