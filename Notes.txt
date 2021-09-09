@@ -9,7 +9,10 @@ pip install -r requirements.txt
 
 Create requirements.txt:
 ========================
-pip freeze > requirements.txt 
+pip install pipreqs
+pipreqs .
+or
+pip freeze > requirements.txt
 
 Activate:
 =========
