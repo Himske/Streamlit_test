@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly.graph_objects as go
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -9,6 +10,7 @@ header = st.container()
 dataset = st.container()
 features = st.container()
 model_training = st.container()
+interactive = st.container()
 
 
 st.markdown(
@@ -81,3 +83,17 @@ with model_training:
 
     disp_col.subheader("R squared error of the model is:")
     disp_col.write(r2_score(y, prediction))
+
+with interactive:
+    st.title("A closer look at the data")
+
+    fig = go.Figure(data=go.Table(
+        header=dict(values=list(taxi_data[["tpep_pickup_datetime", "trip_distance", "total_amount"]].columns),
+                    fill_color="#FD8E72", align="left"),
+        cells=dict(values=[taxi_data.tpep_pickup_datetime, taxi_data.trip_distance, taxi_data.total_amount],
+                   fill_color="#E5ECF6", align="left"),
+        columnwidth=[2, 1, 1]))
+
+    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
+
+    st.write(fig)
